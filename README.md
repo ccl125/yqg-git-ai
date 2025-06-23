@@ -36,7 +36,7 @@ cd yqg-git-ai
 ```
 
 ### 2. 修改 config.json 里的 username
-- 打开项目根目录下的 `config.json`，将 `"username"` 字段改为你自己的 GitLab 用户名（**必填**）。
+- 打开项目根目录下的 `config.json`，将 `"username"` 字段改为你自己的 Git 用户名（**必填**）。
   例如：
   ```json
   {
@@ -48,7 +48,7 @@ cd yqg-git-ai
   }
   ```
 
-### 3. （可选）配置 AI Key 等参数
+### 3. 配置 AI Key 等参数（可选）
 - 如果你暂时不需要 AI 相关功能，可以跳过此步，后续随时补充 config.json 即可。
 - 只有在使用 AI 智能分流、代码审查等功能时才需要配置 API Key。
 - 即使不配置 AI，依然可以使用所有快捷的命令行操作。
@@ -63,7 +63,7 @@ cd yqg-git-ai
   }
   ```
 
-### 4. 全局安装 CLI 工具
+### 4. 全局安装 CLI 工具（推荐 pipx）
 ```bash
 pipx install .
 ```
@@ -82,14 +82,14 @@ yqg-git --help
 
 | 命令                                 | 说明                                 | 支持自然语言/AI语义 |
 |--------------------------------------|--------------------------------------|---------------------|
-| `yqg-git daily-flow`                 | 自动拉取最新 daily 分支并创建新分支   | 是                  |
-| `yqg-git pick-diff`                  | 智能 cherry-pick 你在 master 上的提交，支持 AI 语义 | 是                  |
-| `yqg-git arc-diff`                   | 一键 arc diff 并自动 AI 代码审查      | 是                  |
-| `yqg-git review-<hashid>`            | review 某个 commit diff，AI 审查建议  | 是                  |
-| `yqg-git daily-msg`                  | （已集成到 pick-diff）输出分支变更摘要| 否                  |
-| `yqg-git 我要发布代码`                | 支持自然语言，自动识别并执行 daily-flow | 是                  |
-| `yqg-git 帮我review9d6f998f这个代码`  | 支持自然语言，自动识别并 review commit | 是                  |
-| `yqg-git 我要pick diff`                | 支持自然语言，自动识别并执行 cherry-pick | 是                  |
+| `yqg-git daily-flow`                 | 自动拉取最新 daily 分支并创建新分支   | ✅                  |
+| `yqg-git pick-diff`                  | 智能 cherry-pick 你在 master 上的提交，支持 AI 语义 | ✅                  |
+| `yqg-git arc-diff`                   | 一键 arc diff 并自动 AI 代码审查      | ✅                  |
+| `yqg-git review-<hashid>`            | review 某个 commit diff，AI 审查建议  | ✅                  |
+| `yqg-git daily-msg`                  | （已集成到 pick-diff）输出分支变更摘要| ❌                  |
+| `yqg-git 我要发布代码`                | 支持自然语言，自动识别并执行 daily-flow | ✅                  |
+| `yqg-git 帮我review9d6f998f这个代码`  | 支持自然语言，自动识别并 review commit | ✅                  |
+| `yqg-git 我要pick diff`                | 支持自然语言，自动识别并执行 cherry-pick | ✅                  |
 
 ---
 
