@@ -1,0 +1,4 @@
+openai
+GitPython
+prompt_toolkit
+
