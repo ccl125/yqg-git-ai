@@ -69,8 +69,8 @@ def run_release_flow(repo_path):
     else:
         yn2 = prompt(f"是否要切换到最新的 daily 分支 {latest_daily}？(Y/N): ")
         if yn2.strip().lower() == 'y':
-            remote_branch_name = latest_daily.replace('origin/', '')
-            local_branch_name = remote_branch_name
+            remote_branch_name = latest_daily  # 保持 origin/ 前缀
+            local_branch_name = latest_daily.replace('origin/', '')
             if local_branch_name not in repo.heads:
                 repo.git.checkout('-b', local_branch_name, remote_branch_name)
                 print(f"本地不存在分支 {local_branch_name}，已基于远端创建并切换到该分支。")
