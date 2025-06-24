@@ -3,6 +3,7 @@ import re
 import os
 from ..config import load_config
 from ..ai_agent import ask_ai
+import time
 
 def run_arc_diff_flow(repo_path: str):
     """
@@ -72,10 +73,12 @@ def run_arc_diff_flow(repo_path: str):
             f"\n代码 diff patch：\n{patch_short}"
         )
         print("\nAI 正在分析 diff ...\n")
+        start_time = time.time()
         review = ask_ai(prompt)
+        elapsed = time.time() - start_time
         # 只在这里做正则清理，去除<think>...</think>及其内容
         review = re.sub(r'<think[\s\S]*?>[\s\S]*?</think>', '', review, flags=re.IGNORECASE).strip()
-        print("\n===== AI 代码审查建议 =====\n")
+        print(f"\n===== AI 代码审查建议（本次AI review耗时 {elapsed:.1f}s） =====\n")
         print(review)
         print("\n===== 结束 =====\n")
     except Exception as e:

@@ -13,8 +13,8 @@ def get_daily_branch_sort_key(branch_name):
     return (0, 0)
 
 def is_friday():
-    # return datetime.now().weekday() == 4  # 0是周一，4是周五
-    return datetime.now().weekday() == 0  # 临时改为周一测试
+    return datetime.now().weekday() == 4  # 0是周一，4是周五
+    #return datetime.now().weekday() == 0  # 临时改为周一测试
 
 def run_release_flow(repo_path):
     repo = git.Repo(repo_path)
