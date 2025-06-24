@@ -49,16 +49,24 @@ def run_arc_diff_flow(repo_path: str):
 
     print("\n正在获取本次 diff 的 patch 内容并调用 AI 进行 review...")
     try:
-        # 获取 master 分支名（可根据实际情况调整）
-        base_branch = 'master'
-        # 获取本次 diff 的 patch
-        diff_proc = subprocess.run(
-            ['git', 'diff', f'{base_branch}..HEAD'],
+        # 提取 Diff ID
+        match = re.search(r'Diff URI: https?://\S+/diff/(\d+)/', output)
+        if not match:
+            # 尝试更宽松的正则匹配
+            match = re.search(r'Diff URI: https?://.*/diff/(\d+)/', output)
+        if not match:
+            print("未检测到 Diff ID，跳过 review。")
+            return
+        diff_id = match.group(1)
+        # 用 arc export 获取 patch，增加 --git 参数
+        arc_proc = subprocess.run(
+            ['arc', 'export', '--diff', diff_id, '--git'],
             cwd=repo_path,
             capture_output=True,
             text=True
         )
-        patch = diff_proc.stdout.strip()
+        patch = arc_proc.stdout.strip()
+        # print("\n[调试] patch内容预览：\n" + patch[:500] + "\n[调试结束]\n")
         if not patch:
             print("未检测到 diff 变更内容，跳过 review。")
             return
